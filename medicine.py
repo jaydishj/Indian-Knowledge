@@ -159,9 +159,7 @@ if uploaded_file is not None:
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
        
-    else:
-        st.write("⚠️Invalid image file. Please upload a proper image, The uploaded image does not match any recognized herb. Please try another image.")
+   
+        
 
-        
-        
 
