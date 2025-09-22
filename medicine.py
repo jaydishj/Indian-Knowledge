@@ -115,40 +115,27 @@ plants = [
     }
 ]
 
-if "plant_index" not in st.session_state:
-    st.session_state.plant_index = 0
-
-# ================================
-# Upload your image (optional)
-# ================================
-uploaded_file = st.file_uploader("📤 Upload a Plant Leaf/Photo (Optional)")
+uploaded_file = st.file_uploader("📤 Upload a Plant Leaf/Photo")
+selected_plant_name = None
 
 if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+    
+    # For now, we can **simulate classification** by letting user select from dropdown
+    plant_options = [plant['name_en'] for plant in plants]
+    selected_plant_name = st.selectbox("Select the Plant (Simulated Classification)", plant_options)
 
 # ================================
-# Show current plant info
+# Show Info for the Selected Plant
 # ================================
-plant = plants[st.session_state.plant_index]
-
-st.image(plant["image_url"], caption=f"{plant['name_en']} / {plant['name_ta']}", use_container_width=True)
-st.success(f"✅ Plant: **{plant['name_en']} / {plant['name_ta']}**")
-st.write(f"**🔬 Scientific Name:** {plant['scientific']}")
-st.write(f"**🌱 Properties:** {plant['properties_en']} \n\n 🪴 {plant['properties_ta']}")
-st.write(f"**💊 Therapeutic Uses:** {plant['therapeutic_en']} \n\n 💊 {plant['therapeutic_ta']}")
-st.write(f"**🧴 Curing Details:** {plant['curing_en']} \n\n 🧴 {plant['curing_ta']}")
-
-# ================================
-# Next Plant Button
-# ================================
-if st.button("➡️ Next Plant"):
-    st.session_state.plant_index += 1
-    if st.session_state.plant_index >= len(plants):
-        st.session_state.plant_index = 0  # Loop back to first plant
-    st.experimental_rerun()
-
-
-
-
-
-
+if selected_plant_name:
+    # Find the plant info
+    info = next((p for p in plants if p["name_en"] == selected_plant_name), None)
+    
+    if info:
+        st.image(info["image_url"], caption=f"{info['name_en']} / {info['name_ta']}", use_container_width=True)
+        st.success(f"✅ Plant: **{info['name_en']} / {info['name_ta']}**")
+        st.write(f"**🔬 Scientific Name:** {info['scientific']}")
+        st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
+        st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
+        st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
