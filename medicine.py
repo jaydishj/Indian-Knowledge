@@ -43,7 +43,7 @@ plants = [
         "curing_en": "Neem oil, leaf paste, bark decoction",
         "curing_ta": "வேப்பெண்ணெய், இலை விழுது, பட்டை சாறு",
         "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Azadirachta_indica_Blossoms.jpg"
-    }
+    },
     {
         "name_en": "Jarul",
         "name_ta": "ஜருள்",
@@ -109,3 +109,4 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
