@@ -4,9 +4,46 @@ import streamlit as st
 st.set_page_config(page_title="🌿 Indian Knowledge System 🌿", layout="centered")
 st.title("🌿 Indian Knowledge System 🌿")
 
-# ================================
-# Default Plants Data
-# ================================
+page_bg = """
+<style>
+[data-testid="stAppViewContainer"] {
+    background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+    background-size: auto;
+    background-color: #FFD700; /* leaf base */
+}
+
+[data-testid="stHeader"] {
+    background-color: rgba(0,0,0,0);
+}
+
+[data-testid="stSidebar"] {
+    background-color: #FFF8DC; /* light green for sidebar */
+}
+</style>
+"""
+st.markdown(page_bg, unsafe_allow_html=True)
+
+@st.cache_resource
+def load_model():
+    return tf.keras.models.load_model(r"E:/medicinal plant/medicinal_plant_cnn.h5")
+
+model = load_model()
+st.markdown("""
+### 🧭 About Indian Knowledge Systems (IKS)  
+Indian Knowledge Systems (IKS) represent the holistic and indigenous wisdom of India,  
+covering fields such as **Ayurveda, Yoga, Siddha, Unani, and Ethnobotany**.  
+In Ayurveda, medicinal plants are not just remedies but part of a **sustainable lifestyle**  
+that emphasizes balance between **mind, body, spirit, and environment**.
+
+This application uses **AI + IKS** to recognize medicinal plants and provides:  
+- 🌱 **Scientific & Common Names**  
+- 🌿 **Medicinal Properties**  
+- 💊 **Therapeutic Uses (Traditional & Ayurvedic)**  
+- 🧴 **Curing Applications in Indian Systems**  
+
+✨ By blending **modern machine learning** with **traditional Ayurvedic knowledge**,  
+this tool aims to support research, education, and preservation of India’s medicinal heritage.
+""")
 plants = [
     {
         "name_en": "Malabar Nut / Vasaka",
@@ -109,4 +146,5 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
 
