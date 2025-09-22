@@ -34,7 +34,7 @@ st.markdown(page_bg, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model(r"E:/medicinal plant/medicinal_plant_cnn.h5")
+    return tf.keras.models.load_model("medicinal_plant_cnn.h5")
 
 model = load_model()
 st.markdown("""
@@ -185,4 +185,5 @@ if uploaded_file is not None:
     st.write("**💊 Therapeutic Uses (EN):**", shatavari_info["therapeutic_en"])
     st.write("**💊 சிகிச்சை பயன்பாடுகள் (TA):**", shatavari_info["therapeutic_ta"])
     st.write("**🧴 Curing Method (EN):**", shatavari_info["curing_en"])
+
     st.write("**🧴 பயன்படுத்தும் முறை (TA):**", shatavari_info["curing_ta"])
