@@ -118,20 +118,22 @@ plants = [
 # ================================
 # Optional: Upload your own image
 # ================================
-uploaded_file = st.file_uploader("📤 Upload a Plant Leaf/Photo")
-selected_plant_name = None
-
+uploaded_file = st.file_uploader("📤 Upload a Plant Leaf/Photo (Optional)")
 if uploaded_file is not None:
-    st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
-    
-    
-    if info:
-        st.image(info["image_url"], caption=f"{info['name_en']} / {info['name_ta']}", use_container_width=True)
-        st.success(f"✅ Plant: **{info['name_en']} / {info['name_ta']}**")
-        st.write(f"**🔬 Scientific Name:** {info['scientific']}")
-        st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
-        st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
-        st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+    st.image(uploaded_file, caption="Your Uploaded Image", use_container_width=True)
+
+# ================================
+# Show default plants one by one
+# ================================
+st.write("### 🌱 Default Medicinal Plants")
+for plant in plants:
+    st.image(plant["image_url"], caption=f"{plant['name_en']} / {plant['name_ta']}", use_container_width=True)
+    st.success(f"✅ Plant: **{plant['name_en']} / {plant['name_ta']}**")
+    st.write(f"**🔬 Scientific Name:** {plant['scientific']}")
+    st.write(f"**🌱 Properties:** {plant['properties_en']} \n\n 🪴 {plant['properties_ta']}")
+    st.write(f"**💊 Therapeutic Uses:** {plant['therapeutic_en']} \n\n 💊 {plant['therapeutic_ta']}")
+    st.write(f"**🧴 Curing Details:** {plant['curing_en']} \n\n 🧴 {plant['curing_ta']}")
+    st.markdown("---")
 
 
 
