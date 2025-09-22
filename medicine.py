@@ -124,15 +124,6 @@ selected_plant_name = None
 if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
     
-    # For now, we can **simulate classification** by letting user select from dropdown
-
-
-# ================================
-# Show Info for the Selected Plant
-# ================================
-if selected_plant_name:
-    # Find the plant info
-    info = next((p for p in plants if p["name_en"] == selected_plant_name), None)
     
     if info:
         st.image(info["image_url"], caption=f"{info['name_en']} / {info['name_ta']}", use_container_width=True)
@@ -141,6 +132,7 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
 
 
 
