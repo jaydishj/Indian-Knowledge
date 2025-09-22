@@ -6,6 +6,7 @@ import numpy as np
 from tensorflow.keras.preprocessing import image
 import os
 from pathlib import Path
+import json
 # ================================
 # Custom Background with Ayurvedic Pattern
 # ================================
@@ -57,8 +58,8 @@ this tool aims to support research, education, and preservation of India’s med
 # Dataset class names
 # =============================
 
-class_names = ("classes.json")
-
+with open("classes.json", "r") as f:
+    class_names = json.load(f)
 # =============================
 # Knowledge Base (English + Tamil)
 # =============================
@@ -161,5 +162,6 @@ if uploaded_file is not None:
        
    
         
+
 
 
