@@ -56,8 +56,8 @@ this tool aims to support research, education, and preservation of India’s med
 # =============================
 # Dataset class names
 # =============================
-data_dir = r"e:/medicinal plant/Medicinal_Leaf_Dataset/Compressed_dataset"
-class_names = sorted(os.listdir(data_dir))
+
+class_names = ("classes.json")
 
 # =============================
 # Knowledge Base (English + Tamil)
@@ -164,3 +164,4 @@ if uploaded_file is not None:
 
         
         
+
