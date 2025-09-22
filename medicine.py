@@ -4,65 +4,51 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.preprocessing import image
-import os
-from pathlib import Path
+from PIL import Image
 import json
-# ================================
-# Custom Background with Ayurvedic Pattern
-# ================================
-st.set_page_config(page_title="🌿 Indian knowledge system 🌿", layout="centered")
+from pathlib import Path
 
-st.title("🌿 Indian knowledge system 🌿")
+# ================================
+# Streamlit Page Config & Background
+# ================================
+st.set_page_config(page_title="🌿 Indian Knowledge System 🌿", layout="centered")
+st.title("🌿 Indian Knowledge System 🌿")
 
 page_bg = """
 <style>
 [data-testid="stAppViewContainer"] {
     background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
     background-size: auto;
-    background-color: #FFD700; /* leaf base */
+    background-color: #FFD700;
 }
-
 [data-testid="stHeader"] {
     background-color: rgba(0,0,0,0);
 }
-
 [data-testid="stSidebar"] {
-    background-color: #FFF8DC; /* light green for sidebar */
+    background-color: #FFF8DC;
 }
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)
 
+# ================================
+# Load Model
+# ================================
 @st.cache_resource
 def load_model():
     return tf.keras.models.load_model("medicinal_plant_cnn.h5")
 
 model = load_model()
-st.markdown("""
-### 🧭 About Indian Knowledge Systems (IKS)  
-Indian Knowledge Systems (IKS) represent the holistic and indigenous wisdom of India,  
-covering fields such as **Ayurveda, Yoga, Siddha, Unani, and Ethnobotany**.  
-In Ayurveda, medicinal plants are not just remedies but part of a **sustainable lifestyle**  
-that emphasizes balance between **mind, body, spirit, and environment**.
 
-This application uses **AI + IKS** to recognize medicinal plants and provides:  
-- 🌱 **Scientific & Common Names**  
-- 🌿 **Medicinal Properties**  
-- 💊 **Therapeutic Uses (Traditional & Ayurvedic)**  
-- 🧴 **Curing Applications in Indian Systems**  
-
-✨ By blending **modern machine learning** with **traditional Ayurvedic knowledge**,  
-this tool aims to support research, education, and preservation of India’s medicinal heritage.
-""")
-# =============================
-# Dataset class names
-# =============================
-
+# ================================
+# Load Class Names
+# ================================
 with open("classes.json", "r") as f:
-    class_names = json.load(f)
-# =============================
-# Knowledge Base (English + Tamil)
-# =============================
+    class_names = json.load(f)  # Must be a list of plant names
+
+# ================================
+# Knowledge Base
+# ================================
 plant_info = {
     "Ashok": {
         "scientific": "Saraca asoca",
@@ -121,13 +107,13 @@ plant_info = {
     }
 }
 
-# =============================
+# ================================
 # Prediction Function
-# =============================
-def predict_image(img):
+# ================================
+def predict_image(img_file):
     img_size = (224, 224)
-    img = image.load_img(img, target_size=img_size)
-    img_array = image.img_to_array(img) / 255.0
+    img = Image.open(img_file).resize(img_size)
+    img_array = np.array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
     predictions = model.predict(img_array)
@@ -137,10 +123,9 @@ def predict_image(img):
     plant_name = class_names[predicted_class]
     return plant_name, confidence
 
-# =============================
+# ================================
 # Streamlit UI
-# =============================
-
+# ================================
 st.write("Upload a medicinal plant image to get its **prediction, scientific name, medicinal uses, and bilingual details (English + தமிழ்)**")
 
 uploaded_file = st.file_uploader("📤 Upload a Plant Leaf/Photo", type=["jpg", "jpeg", "png"])
@@ -149,19 +134,18 @@ if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
 
     with st.spinner("🔍 Analyzing..."):
-        plant_name, confidence = predict_image(uploaded_file)
+        try:
+            plant_name, confidence = predict_image(uploaded_file)
 
-    if plant_name in plant_info:
-        info = plant_info[plant_name]
-
-        st.success(f"✅ Predicted: **{info['common_en']} / {info['common_ta']}**")
-        st.write(f"**🔬 Scientific Name:** {info['scientific']}")
-        st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
-        st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
-        st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
-       
-   
-        
-
-
-
+            if plant_name in plant_info:
+                info = plant_info[plant_name]
+                st.success(f"✅ Predicted: **{info['common_en']} / {info['common_ta']}**")
+                st.write(f"**Confidence:** {confidence*100:.2f}%")
+                st.write(f"**🔬 Scientific Name:** {info['scientific']}")
+                st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
+                st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
+                st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+            else:
+                st.error("⚠️ Unrecognized plant. Please try another image.")
+        except Exception as e:
+            st.error(f"❌ Error during prediction: {e}")
