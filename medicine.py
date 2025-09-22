@@ -23,11 +23,7 @@ page_bg = """
 """
 st.markdown(page_bg, unsafe_allow_html=True)
 
-@st.cache_resource
-def load_model():
-    return tf.keras.models.load_model(r"E:/medicinal plant/medicinal_plant_cnn.h5")
 
-model = load_model()
 st.markdown("""
 ### 🧭 About Indian Knowledge Systems (IKS)  
 Indian Knowledge Systems (IKS) represent the holistic and indigenous wisdom of India,  
@@ -146,5 +142,6 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
 
 
