@@ -125,8 +125,7 @@ if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
     
     # For now, we can **simulate classification** by letting user select from dropdown
-    plant_options = [plant['name_en'] for plant in plants]
-    selected_plant_name = st.selectbox("Select the Plant (Simulated Classification)", plant_options)
+
 
 # ================================
 # Show Info for the Selected Plant
@@ -142,6 +141,7 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
 
 
 
