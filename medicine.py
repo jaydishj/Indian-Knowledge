@@ -160,30 +160,7 @@ if uploaded_file is not None:
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
        
     else:
+        st.write("⚠️Invalid image file. Please upload a proper image, The uploaded image does not match any recognized herb. Please try another image.")
 
         
-        shatavari_info = {
-        "scientific": "Asparagus racemosus",
-        "common_en": "Shatavari",
-        "common_ta": "தண்ணீர்விட்டான் கிழங்கு",
-        "properties_en": "Rejuvenative, galactagogue, cooling",
-        "properties_ta": "உடல் புத்துணர்ச்சி தரும், தாய்ப்பால் அதிகரிப்பு, குளிர்ச்சி தரும்",
-        "therapeutic_en": "Used for female reproductive health, lactation, ulcers",
-        "therapeutic_ta": "பெண்களின் இனப்பெருக்க நலம், தாய்ப்பால் அதிகரிப்பு, புண்கள் குணமாகும்",
-        "curing_en": "Powder with milk; root decoction",
-        "curing_ta": "தூள் பால் கலந்து குடிக்கப்படும்; வேர் கஷாயமாக குடிக்கப்படும்"
-    }
-
-    # Display fallback plant info
-    st.warning("⚠️ No exact match found. Showing default plant information: **Shatavari**")
-    st.subheader("🌿 Shatavari (Asparagus racemosus)")
-    st.write("**🔬 Scientific Name:**", shatavari_info["scientific"])
-    st.write("**🌱 Common Name (English):**", shatavari_info["common_en"])
-    st.write("**🌱 Common Name (Tamil):**", shatavari_info["common_ta"])
-    st.write("**🌿 Medicinal Properties (EN):**", shatavari_info["properties_en"])
-    st.write("**🌿 மருத்துவ குணங்கள் (TA):**", shatavari_info["properties_ta"])
-    st.write("**💊 Therapeutic Uses (EN):**", shatavari_info["therapeutic_en"])
-    st.write("**💊 சிகிச்சை பயன்பாடுகள் (TA):**", shatavari_info["therapeutic_ta"])
-    st.write("**🧴 Curing Method (EN):**", shatavari_info["curing_en"])
-
-    st.write("**🧴 பயன்படுத்தும் முறை (TA):**", shatavari_info["curing_ta"])
+        
