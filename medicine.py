@@ -2,7 +2,7 @@
 import streamlit as st
 
 st.set_page_config(page_title="🌿 Indian Knowledge System 🌿", layout="centered")
-st.title("🌿 Indian Knowledge System 🌿")
+st.title("🌿 Herbo Vision AI: Indian Knowledge System 🌿")
 
 page_bg = """
 <style>
@@ -139,3 +139,4 @@ if selected_plant_name:
         st.write(f"**🌱 Properties:** {info['properties_en']} \n\n 🪴 {info['properties_ta']}")
         st.write(f"**💊 Therapeutic Uses:** {info['therapeutic_en']} \n\n 💊 {info['therapeutic_ta']}")
         st.write(f"**🧴 Curing Details:** {info['curing_en']} \n\n 🧴 {info['curing_ta']}")
+
