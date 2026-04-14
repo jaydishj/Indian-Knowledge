@@ -2,7 +2,7 @@
 import streamlit as st
 
 st.set_page_config(page_title="🌿 Indian Knowledge System 🌿", layout="centered")
-st.title("🌿 Herbo Vision AI: Indian Knowledge System 🌿")
+st.title("🌿 Scan to Sense AI: Indian Knowledge System 🌿")
 
 page_bg = """
 <style>
