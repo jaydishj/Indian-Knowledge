@@ -4,24 +4,6 @@ import streamlit as st
 st.set_page_config(page_title="🌿 Indian Knowledge System 🌿", layout="centered")
 st.title("🌿 Scan to Sense:Indian Knowledge System 🌿")
 
-page_bg = """
-<style>
-[data-testid="stAppViewContainer"] {
-    background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
-    background-size: auto;
-    background-color: #FFD700; /* leaf base */
-}
-
-[data-testid="stHeader"] {
-    background-color: rgba(0,0,0,0);
-}
-
-[data-testid="stSidebar"] {
-    background-color: #FFF8DC; /* light green for sidebar */
-}
-</style>
-"""
-st.markdown(page_bg, unsafe_allow_html=True)
 
 
 st.markdown("""
